@@ -1,0 +1,27 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col">
+            <h2>Add Task</h2>
+            <form action="/" method="POST">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+        {% for task in tasks %}
+            <ul class="list-group">
+                <li class="list-group-item">{{task}}</li>
+                <a href="{% url 'update_task' task.id %}">Update</a>
+                <a href="{% url 'delete' task.id %}">Delete</a>
+            </ul>
+        {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}
+
